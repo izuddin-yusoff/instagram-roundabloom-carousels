@@ -61,6 +61,10 @@ jobs:
               print(f"   Page: {page.get('name')}  Instagram: @{ig.get('username')}  ID: {ig.get('id')}")
           if "error" in data:
               print("  ", data["error"])
+          print("   accounts raw:", json.dumps(data)[:300])
+          for f in ["id,name", "id,username,name", "id,user_id,username"]:
+              r = get("https://graph.facebook.com/v26.0/me?fields=" + f + "&access_token=" + tok)
+              print("   me?fields=" + f + ":", json.dumps(r)[:300])
           PY
 
       - name: Publish the next carousel
