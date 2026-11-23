@@ -51,7 +51,11 @@ MAX_CAPTION_CHARS = 2200
 MAX_HASHTAGS = 30
 
 GRAPH_VERSION = os.environ.get("GRAPH_VERSION", "v26.0")
-GRAPH = f"https://graph.facebook.com/{GRAPH_VERSION}"
+# Tokens made by logging in with Instagram (they start with "IG") use
+# graph.instagram.com; system-user tokens use graph.facebook.com.
+_TOKEN = os.environ.get("IG_ACCESS_TOKEN", "").strip()
+GRAPH_HOST = "graph.instagram.com" if _TOKEN.startswith("IG") else "graph.facebook.com"
+GRAPH = f"https://{GRAPH_HOST}/{GRAPH_VERSION}"
 
 
 class PublishError(Exception):
