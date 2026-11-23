@@ -44,15 +44,23 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
         run: |
           python3 - <<'PY'
-          import json, os, urllib.request
+          import json, os, urllib.request, urllib.error
           tok = os.environ["IG_ACCESS_TOKEN"].strip()
-          url = "https://graph.facebook.com/v26.0/me/accounts?fields=name,instagram_business_account{id,username}&access_token=" + tok
-          data = json.load(urllib.request.urlopen(url))
+          def get(url):
+              try:
+                  return json.load(urllib.request.urlopen(url))
+              except urllib.error.HTTPError as e:
+                  return {"error": e.read().decode()[:300]}
+          print("Instagram login token check (graph.instagram.com):")
+          me = get("https://graph.instagram.com/v26.0/me?fields=user_id,username&access_token=" + tok)
+          print("  ", {k: v for k, v in me.items() if k != "error"} or me.get("error"))
+          print("Facebook login token check (graph.facebook.com):")
+          data = get("https://graph.facebook.com/v26.0/me/accounts?fields=name,instagram_business_account{id,username}&access_token=" + tok)
           for page in data.get("data", []):
               ig = page.get("instagram_business_account") or {}
-              print(f"Page: {page.get('name')}  Instagram: @{ig.get('username')}  ID: {ig.get('id')}")
-          if not data.get("data"):
-              print("The token sees no Facebook Pages. Check which assets the system user can use.")
+              print(f"   Page: {page.get('name')}  Instagram: @{ig.get('username')}  ID: {ig.get('id')}")
+          if "error" in data:
+              print("  ", data["error"])
           PY
 
       - name: Publish the next carousel
