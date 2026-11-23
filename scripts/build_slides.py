@@ -36,6 +36,7 @@ DRAFTS = ROOT / "drafts"
 CREAM, BLUSH, INK, MUTED = "#FFF6EF", "#FCE3D6", "#4B2E39", "#7A6470"
 ROSE, DEEP, AMBER, WHITE = "#E07A5F", "#C2563F", "#F2A58E", "#FFFFFF"
 SAGE = "#8FAE8B"
+SAGE_DARK = "#5E7D5A"   # sage dark enough for small labels
 SERIF = "'Fraunces', Georgia, serif"
 SANS = "'DM Sans', system-ui, sans-serif"
 HANDLE = "@roundabloom"
@@ -89,6 +90,51 @@ def flower(ring=True):
     )
 
 
+def bloom(size, opacity, position, petal=None, inner="#F9CDB9"):
+    """A large decorative bloom (the logo shape) for slide backgrounds."""
+    outer = "".join(
+        f'<ellipse cx="0" cy="-118" rx="62" ry="108" fill="{petal or (AMBER if i % 2 == 0 else ROSE)}" '
+        f'transform="rotate({i * 45})"></ellipse>'
+        for i in range(8)
+    )
+    inn = "".join(
+        f'<ellipse cx="0" cy="-62" rx="34" ry="58" fill="{inner}" transform="rotate({i * 45 + 22.5})"></ellipse>'
+        for i in range(8)
+    )
+    return (
+        f'<div style="position: absolute; {position}; width: {size}px; height: {size}px; opacity: {opacity}">'
+        f'<svg width="{size}" height="{size}" viewBox="-240 -240 480 480">{outer}{inn}'
+        f'<circle r="44" fill="{SAGE}"></circle><circle r="20" fill="#F7E7C6"></circle></svg></div>'
+    )
+
+
+def petal_badge(number):
+    """The step number inside a small coral flower."""
+    petals = "".join(
+        f'<ellipse cx="0" cy="-52" rx="34" ry="50" fill="{AMBER if i % 2 == 0 else ROSE}" '
+        f'transform="rotate({i * 60})"></ellipse>'
+        for i in range(6)
+    )
+    return (
+        '<div style="position: relative; width: 170px; height: 170px">'
+        f'<svg width="170" height="170" viewBox="-110 -110 220 220">{petals}'
+        f'<circle r="56" fill="{DEEP}"></circle></svg>'
+        '<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; '
+        f'font-family: {SERIF}; font-weight: 700; font-size: 72px; color: {WHITE}; padding-bottom: 6px">{number}</div></div>'
+    )
+
+
+def bubble(bg, label, text, size):
+    """A rounded chat-bubble panel for the line to try."""
+    return (
+        f'<div style="margin-top: 12px; align-self: flex-start; max-width: 100%; background: {bg}; '
+        'border-radius: 56px 56px 56px 14px; padding: 40px 48px; display: flex; flex-direction: column; gap: 14px; '
+        'box-shadow: 0 6px 0 rgba(75,46,57,0.06)">'
+        f'<div style="font-size: 26px; font-weight: 700; letter-spacing: 4px; color: {SAGE_DARK}">{esc(label)}</div>'
+        f'<div style="font-family: {SERIF}; font-weight: 700; font-size: {size}px; line-height: 1.3">{esc(text)}</div></div>'
+    )
+
+
 def arrow(color):
     return (
         f'<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="{color}" '
@@ -121,7 +167,7 @@ def circle(color, opacity, size, position):
 
 
 def frame(n, total, label, background, text, decor, body, footer_right, dark=False):
-    label_color = WHITE if dark else DEEP
+    label_color = WHITE if dark else SAGE_DARK
     count_color = WHITE if dark else MUTED
     return f"""<!doctype html>
 <html lang="en-US">
@@ -155,21 +201,23 @@ def frame(n, total, label, background, text, decor, body, footer_right, dark=Fal
 def cover_slide(c, total):
     headline = c["cover"]["headline"]
     plain = headline.replace("*", "")
-    size = 112 if len(plain) <= 40 else 96 if len(plain) <= 58 else 84
+    size = 104 if len(plain) <= 40 else 92 if len(plain) <= 58 else 80
     body = (
+        '<div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 40px">'
+        '<div style="position: relative; width: 240px; height: 240px">'
+        + bloom(240, 1, "left: 0; top: 0").replace("position: absolute; left: 0; top: 0; ", "position: absolute; inset: 0; ")
+        + '</div>'
         f'<h1 style="margin: 0; text-wrap: balance; font-family: {SERIF}; font-weight: 700; font-size: {size}px; '
         f'line-height: 1.08; letter-spacing: -1px">{emph(headline, DEEP)}</h1>'
-        f'<p style="margin: 0; font-size: 44px; line-height: 1.35; color: {MUTED}; '
-        f'max-width: 780px">{esc(c["cover"]["sub"])}</p>'
+        f'<p style="margin: 0; font-size: 42px; line-height: 1.35; color: {MUTED}; '
+        f'max-width: 760px">{esc(c["cover"]["sub"])}</p></div>'
     )
-    decor = circle(ROSE, 0.2, 620, "right: -180px; top: -160px") + circle(
-        AMBER, 0.28, 300, "left: -120px; bottom: 30px"
-    )
+    decor = bloom(520, 0.10, "right: -200px; top: -170px") + bloom(380, 0.10, "left: -160px; bottom: -120px")
     swipe = (
         f'<div style="display: flex; align-items: center; gap: 14px; font-size: 34px; '
         f'font-weight: 700; color: {DEEP}"><span>Swipe</span>{arrow(DEEP)}</div>'
     )
-    return frame(1, total, c["label"], CREAM, INK, decor, body, swipe)
+    return frame(1, total, c["label"], BLUSH, INK, decor, body, swipe)
 
 
 def point_slide(c, index, total):
@@ -178,9 +226,9 @@ def point_slide(c, index, total):
     blush = index % 2 == 0
     background, panel_bg = (BLUSH, WHITE) if blush else (CREAM, BLUSH)
     decor = (
-        circle(ROSE, 0.16, 460, "right: -200px; top: 180px")
+        bloom(420, 0.10, "right: -170px; top: 150px")
         if blush
-        else circle(AMBER, 0.26, 460, "left: -170px; bottom: 60px")
+        else bloom(420, 0.10, "left: -170px; bottom: 40px")
     )
     heading = p["heading"]
     h_size = 84 if len(heading) <= 24 else 76 if len(heading) <= 40 else 66
@@ -188,44 +236,36 @@ def point_slide(c, index, total):
     long_slide = len(heading) > 24 and len(p["body"]) > 100
     num_size = 150 if long_slide else 200
     parts = [
-        f'<div style="font-family: {SERIF}; font-weight: 700; font-size: {num_size}px; '
-        f'line-height: 0.9; color: {ROSE}">{index + 1}</div>',
+        petal_badge(index + 1),
         f'<h2 style="margin: 0; text-wrap: balance; font-family: {SERIF}; font-weight: 700; font-size: {h_size}px; '
         f'line-height: 1.1">{esc(heading)}</h2>',
         f'<p style="margin: 0; font-size: {b_size}px; line-height: 1.4">{esc(p["body"])}</p>',
     ]
     if p.get("panel"):
         q_size = 46 if len(p["panel"]) <= 72 else 40
-        parts.append(
-            f'<div style="margin-top: 12px; background: {panel_bg}; border-radius: 28px; '
-            'padding: 40px 44px; display: flex; flex-direction: column; gap: 14px">'
-            f'<div style="font-size: 26px; font-weight: 700; letter-spacing: 4px; color: {DEEP}">'
-            f'{esc(p.get("panel_label", "TRY SAYING"))}</div>'
-            f'<div style="font-family: {SERIF}; font-weight: 700; font-size: {q_size}px; '
-            f'line-height: 1.3">{esc(p["panel"])}</div></div>'
-        )
+        parts.append(bubble(panel_bg, p.get("panel_label", "TRY SAYING"), p["panel"], q_size))
     return frame(n, total, c["label"], background, INK, decor, "\n".join(parts), arrow(DEEP))
 
 
 def resource_slide(c, n, total):
     r = c["resource"]
     body = (
-        f'<div style="font-size: 30px; font-weight: 700; letter-spacing: 5px; color: {DEEP}">'
+        f'<div style="font-size: 30px; font-weight: 700; letter-spacing: 5px; color: {SAGE_DARK}">'
         "A RESOURCE FOR THIS</div>"
         f'<h2 style="margin: 0; text-wrap: balance; font-family: {SERIF}; font-weight: 700; font-size: 84px; '
         f'line-height: 1.1">{esc(r["name"])}</h2>'
         f'<p style="margin: 0; font-size: 44px; line-height: 1.4">{esc(r["covers"])}</p>'
         f'<p style="margin: 0; font-size: 36px; line-height: 1.4; color: {MUTED}">'
         "It’s a self-help program, not professional counseling. Results vary.</p>"
-        f'<div style="margin-top: 12px; background: {WHITE}; border-radius: 28px; '
-        'padding: 40px 44px; display: flex; flex-direction: column; gap: 14px">'
+        f'<div style="margin-top: 12px; background: {WHITE}; border-radius: 56px 56px 56px 14px; '
+        'padding: 40px 48px; display: flex; flex-direction: column; gap: 14px">'
         f'<div style="font-family: {SERIF}; font-weight: 700; font-size: 46px; line-height: 1.3">'
         "Find it at the link in bio.</div>"
         f'<div style="font-size: 30px; line-height: 1.4; color: {MUTED}">'
         "Affiliate link: I may earn a commission if you buy through it, "
         "at no extra cost to you.</div></div>"
     )
-    decor = circle(ROSE, 0.16, 460, "right: -200px; top: 180px")
+    decor = bloom(420, 0.10, "right: -170px; top: 150px")
     return frame(n, total, c["label"], BLUSH, INK, decor, body, arrow(DEEP))
 
 
@@ -255,12 +295,12 @@ def close_slide(c, total):
     ]
     if close.get("safety"):
         parts.append(
-            f'<div style="background: {CREAM}; color: {INK}; border-radius: 28px; '
+            f'<div style="background: {CREAM}; color: {INK}; border-radius: 40px 40px 40px 14px; '
             f'padding: 36px 40px; font-size: 34px; line-height: 1.4">{SAFETY}</div>'
         )
-    decor = circle(WHITE, 0.08, 620, "right: -200px; top: -180px")
+    decor = bloom(560, 0.16, "right: -200px; top: -170px")
     return frame(
-        total, total, c["label"], DEEP, WHITE, decor, "\n".join(parts), "<div></div>", dark=True
+        total, total, c["label"], INK, WHITE, decor, "\n".join(parts), "<div></div>", dark=True
     )
 
 
