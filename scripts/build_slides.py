@@ -128,7 +128,8 @@ def frame(n, total, label, background, text, decor, body, footer_right, dark=Fal
 <head>
 <meta charset="utf-8">
 <title>Slide {n}</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,700,100,0&display=block">
+<style>* {{ font-variation-settings: "opsz" 36, "SOFT" 100, "WONK" 0; }}</style>
 <style>html,body{{margin:0;padding:0;background:{background}}}</style>
 </head>
 <body>
