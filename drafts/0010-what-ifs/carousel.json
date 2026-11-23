@@ -1,0 +1,53 @@
+{
+  "type": "useful",
+  "label": "HEALING",
+  "cover": {
+    "headline": "Stop replaying it: *quiet the “what ifs”*",
+    "sub": "5 ways to step out of the loop."
+  },
+  "points": [
+    {
+      "heading": "Notice the loop",
+      "body": "Replaying it rarely brings new answers, just more hurt.",
+      "panel_label": "TRY SAYING",
+      "panel": "“I’m replaying it again. I can pause.”"
+    },
+    {
+      "heading": "Give it a time slot",
+      "body": "Let yourself think it through for ten minutes, then stop.",
+      "panel_label": "TRY THIS",
+      "panel": "Set a ten-minute timer to journal, then close the book."
+    },
+    {
+      "heading": "Move your body",
+      "body": "A walk or stretch can break a thought spiral.",
+      "panel_label": "TRY THIS",
+      "panel": "Take a ten-minute walk without your phone."
+    },
+    {
+      "heading": "Write the kinder story",
+      "body": "Look back with compassion for who you were then.",
+      "panel_label": "TRY SAYING",
+      "panel": "“I did my best with what I knew.”"
+    },
+    {
+      "heading": "Talk it through once",
+      "body": "Saying it out loud to someone safe can let it settle.",
+      "panel_label": "TRY TEXTING",
+      "panel": "“Can I vent for a few minutes? I keep going over it.”"
+    }
+  ],
+  "close": {
+    "save": "Save this for the replay nights.",
+    "safety": false
+  },
+  "caption": "After a breakup, the mind loves to rewind: what if I’d said this, what if I hadn’t done that.\n\nIt’s a normal part of healing, but it can keep you stuck. These five gentle ways help you step out of the loop and back into your day.\n\nSave this for the replay nights, and follow @roundabloom for more.",
+  "hashtags": [
+    "#breakuprecovery",
+    "#healingjourney",
+    "#overthinking",
+    "#letgo",
+    "#movingon",
+    "#selfcare"
+  ]
+}

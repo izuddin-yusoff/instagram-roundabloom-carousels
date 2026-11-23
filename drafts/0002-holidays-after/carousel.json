@@ -1,0 +1,53 @@
+{
+  "type": "useful",
+  "label": "HEALING",
+  "cover": {
+    "headline": "The holidays *after a breakup*",
+    "sub": "5 ways to get through the season gently."
+  },
+  "points": [
+    {
+      "heading": "Plan for the hard moments",
+      "body": "Family questions, empty traditions. Knowing what’s coming helps.",
+      "panel_label": "TRY SAYING",
+      "panel": "“I’d rather not talk about it today, but thanks for asking.”"
+    },
+    {
+      "heading": "Make one new tradition",
+      "body": "Something that’s just yours this year, however small.",
+      "panel_label": "TRY THIS",
+      "panel": "Pick one cozy ritual: a movie night, a walk, a new recipe."
+    },
+    {
+      "heading": "Say yes to good company",
+      "body": "Spend time with people who make you feel lighter.",
+      "panel_label": "TRY TEXTING",
+      "panel": "“Can I come over for a bit this weekend?”"
+    },
+    {
+      "heading": "Go easy on social media",
+      "body": "Everyone’s highlight reel is extra shiny this time of year.",
+      "panel_label": "TRY THIS",
+      "panel": "Mute a few accounts for the season."
+    },
+    {
+      "heading": "Let it be imperfect",
+      "body": "Some moments will sting. That doesn’t mean you’re not healing.",
+      "panel_label": "TRY SAYING",
+      "panel": "“It’s a hard day, and I’m still okay.”"
+    }
+  ],
+  "close": {
+    "save": "Save this for the season.",
+    "safety": false
+  },
+  "caption": "The holidays can make a breakup feel louder: the traditions, the questions, the photos everywhere.\n\nYou don’t have to love every moment this year. You just have to be gentle with yourself while you get through it. These five steps can help.\n\nSave this for the season, and share it with someone who might need it too.",
+  "hashtags": [
+    "#breakuprecovery",
+    "#healingjourney",
+    "#holidayseason",
+    "#selfcare",
+    "#movingon",
+    "#selflove"
+  ]
+}

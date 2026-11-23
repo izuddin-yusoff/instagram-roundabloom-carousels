@@ -1,0 +1,50 @@
+{
+  "type": "promo",
+  "label": "DATING AGAIN",
+  "cover": {
+    "headline": "4 texting habits that *make it easier*",
+    "sub": "Less overthinking, more real conversation."
+  },
+  "points": [
+    {
+      "heading": "Ask open questions",
+      "body": "Questions with more than a yes-or-no answer keep a chat going.",
+      "panel_label": "TRY TEXTING",
+      "panel": "“What’s been the best part of your week?”"
+    },
+    {
+      "heading": "Match the energy, gently",
+      "body": "You don’t need to reply instantly or write paragraphs.",
+      "panel_label": "TRY THIS",
+      "panel": "Reply when you’re free, at about the length you received."
+    },
+    {
+      "heading": "Be a little playful",
+      "body": "A light, warm tone reads as confidence.",
+      "panel_label": "TRY TEXTING",
+      "panel": "“Okay, important question: pancakes or waffles?”"
+    },
+    {
+      "heading": "Move it off the screen",
+      "body": "Texting is for connecting. Real chemistry shows in person.",
+      "panel_label": "TRY TEXTING",
+      "panel": "“I’m enjoying this. Want to grab coffee Saturday?”"
+    }
+  ],
+  "resource": {
+    "name": "Text Chemistry",
+    "covers": "Ideas for texting with more confidence while you’re getting to know someone."
+  },
+  "close": {
+    "safety": false
+  },
+  "caption": "So much of dating happens in the texts now, and it’s easy to overthink every word.\n\nThese four habits take some of the pressure off. If you’d like more ideas for texting with confidence while you get to know someone, there’s a resource at the link in bio. It’s a place to start, and no resource can promise how someone will respond.\n\nFollow @roundabloom for more gentle steps.",
+  "hashtags": [
+    "#datingadvice",
+    "#datingtips",
+    "#textingtips",
+    "#datinglife",
+    "#singlelife",
+    "#confidence"
+  ]
+}

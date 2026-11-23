@@ -1,0 +1,50 @@
+{
+  "type": "promo",
+  "label": "HEALING",
+  "cover": {
+    "headline": "Not ready to let go? *4 honest questions first*",
+    "sub": "Before you decide anything."
+  },
+  "points": [
+    {
+      "heading": "Was it good for you?",
+      "body": "Not just exciting, but good: safe, kind, and steady.",
+      "panel_label": "TRY ASKING",
+      "panel": "“Did I feel respected most of the time?”"
+    },
+    {
+      "heading": "What went wrong, really?",
+      "body": "Name the problems clearly, not only the good memories.",
+      "panel_label": "TRY THIS",
+      "panel": "Write down the three biggest issues honestly."
+    },
+    {
+      "heading": "What does he want?",
+      "body": "His choice matters too. Trying again only works if you both want it.",
+      "panel_label": "TRY ASKING",
+      "panel": "“Have I heard clearly what he wants?”"
+    },
+    {
+      "heading": "What would need to change?",
+      "body": "If you did try again, what would have to be different?",
+      "panel_label": "TRY ASKING",
+      "panel": "“What would make this healthier than before?”"
+    }
+  ],
+  "resource": {
+    "name": "The Ex Factor 2.0",
+    "covers": "For women facing emotional distance, separation, or a serious rupture."
+  },
+  "close": {
+    "safety": true
+  },
+  "caption": "Sometimes a breakup doesn’t feel finished. Before you decide anything, it helps to look honestly at what you had and what you want.\n\nThese four questions keep your wellbeing at the center. If you’re facing emotional distance, separation, or a serious rupture, there’s a resource at the link in bio. It’s a place to start, and no resource can promise what another person will decide.\n\nFollow @roundabloom for more.",
+  "hashtags": [
+    "#breakuprecovery",
+    "#heartbreak",
+    "#healingjourney",
+    "#relationshipadvice",
+    "#movingon",
+    "#selfworth"
+  ]
+}
