@@ -1,0 +1,82 @@
+name: Publish carousel
+
+on:
+  schedule:
+    # Posting slots are 8:30 am and 8:30 pm US Eastern. GitHub's clock is UTC
+    # and ignores daylight saving. GitHub also skips some scheduled wake-ups
+    # when it is busy, so the job wakes every 20 minutes through each slot's
+    # three-hour window. scripts/publish.py decides whether a slot is open
+    # and makes sure each slot is used only once.
+    - cron: "7,27,47 0-4,12-16 * * *"
+  # The main timer: an outside service (cron-job.org) sends a "post-slot"
+  # event at each posting time, because GitHub's own schedule above often
+  # fires hours late or not at all. The schedule stays as a backup.
+  repository_dispatch:
+    types: [post-slot]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run shows what would post next. publish-now posts the next carousel immediately."
+        type: choice
+        default: dry-run
+        options:
+          - dry-run
+          - publish-now
+          - find-account-id
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-carousel
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find the Instagram account ID
+        if: github.event.inputs.mode == 'find-account-id'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          tok = os.environ["IG_ACCESS_TOKEN"].strip()
+          url = "https://graph.facebook.com/v26.0/me/accounts?fields=name,instagram_business_account{id,username}&access_token=" + tok
+          data = json.load(urllib.request.urlopen(url))
+          for page in data.get("data", []):
+              ig = page.get("instagram_business_account") or {}
+              print(f"Page: {page.get('name')}  Instagram: @{ig.get('username')}  ID: {ig.get('id')}")
+          if not data.get("data"):
+              print("The token sees no Facebook Pages. Check which assets the system user can use.")
+          PY
+
+      - name: Publish the next carousel
+        if: github.event.inputs.mode != 'find-account-id'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ vars.IG_USER_ID }}
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          case "$MODE" in
+            dry-run)     python3 scripts/publish.py --dry-run --force ;;
+            publish-now) python3 scripts/publish.py --force ;;
+            *)           python3 scripts/publish.py ;;
+          esac
+
+      - name: Record what was posted
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A queue posted state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nothing to record."
+          else
+            git commit -m "Record posted carousel"
+            git pull --rebase
+            git push
+          fi
