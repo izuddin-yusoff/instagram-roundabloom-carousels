@@ -1,0 +1,50 @@
+{
+  "type": "promo",
+  "label": "DATING AGAIN",
+  "cover": {
+    "headline": "4 first messages that *actually start a conversation*",
+    "sub": "Better than “hey.”"
+  },
+  "points": [
+    {
+      "heading": "Comment on something specific",
+      "body": "Their profile gives you an easy opening.",
+      "panel_label": "TRY TEXTING",
+      "panel": "“Your hiking photo looks amazing. Where was that?”"
+    },
+    {
+      "heading": "Ask an easy, fun question",
+      "body": "Light questions are easier to answer than “how are you?”",
+      "panel_label": "TRY TEXTING",
+      "panel": "“Okay, important: best snack for a road trip?”"
+    },
+    {
+      "heading": "Share a little about you",
+      "body": "A two-way conversation feels more natural.",
+      "panel_label": "TRY TEXTING",
+      "panel": "“I just tried a new coffee place. Do you have a favorite?”"
+    },
+    {
+      "heading": "Keep it short",
+      "body": "A short, warm message is easier to reply to.",
+      "panel_label": "TRY THIS",
+      "panel": "Two sentences, one question. That’s enough."
+    }
+  ],
+  "resource": {
+    "name": "Text Chemistry",
+    "covers": "Ideas for texting with more confidence while you’re getting to know someone."
+  },
+  "close": {
+    "safety": false
+  },
+  "caption": "The first message can feel like the hardest part of online dating. “Hey” rarely starts anything.\n\nThese four approaches make it easier to start real conversations. If you’d like more ideas for texting with confidence while you get to know someone, there’s a resource at the link in bio. It’s a place to start, and no resource can promise how someone will respond.\n\nFollow @roundabloom for more.",
+  "hashtags": [
+    "#datingapps",
+    "#textingtips",
+    "#datingtips",
+    "#datinglife",
+    "#singlelife",
+    "#confidence"
+  ]
+}
